@@ -1,64 +1,39 @@
-function greetUser(name = "Guest") {
-  console.info(`Hello, ${name}`);
+// A simple file with minor code smells but will pass Quality Gate
+
+function greet(name) {
+  const greeting = name ? `Hello, ${name}` : "Hello, Guest";
+  console.info(greeting); // Minor smell: console.info usage
+  return greeting;
 }
 
-function calculateArea(length, width) {
-  if (length <= 0 || width <= 0) {
-    throw new Error("Invalid dimensions");
-  }
-  return length * width;
+function sum(a, b) {
+  return a + b;
 }
 
-function checkPassword(password) {
-  return typeof password === "string" && password.length >= 6;
+function isValidEmail(email) {
+  // Simple check; not best practice — may show as code smell
+  return email.includes("@");
 }
 
-function buildProfile({ name, age, city, country, email }) {
-  return { name, age, city, country, email };
-}
-
-function runCommand(cmd) {
-  const allowedCommands = {
-    logTest: () => console.info("Test command executed"),
-  };
-
-  if (allowedCommands[cmd]) {
-    allowedCommands[cmd]();
-  } else {
-    console.warn("Invalid command");
-  }
-}
-
-function computeValue() {
-  let x = 1;
-  x += 2;
-  x *= 3;
+// Slight duplication (will not fail gate)
+function duplicateA() {
+  let x = 10;
+  x++;
   return x;
 }
 
-// Call functions
-greetUser("Yug");
-
-try {
-  const area = calculateArea(5, 10);
-  console.info("Area:", area);
-} catch (error) {
-  console.error(error.message);
+function duplicateB() {
+  let x = 10;
+  x++;
+  return x;
 }
 
-const isPasswordValid = checkPassword("abc123");
-if (!isPasswordValid) {
-  console.warn("Password validation failed");
-}
+// Function that does nothing (minor issue)
+function unusedFunction() {}
 
-const profile = buildProfile({
-  name: "Yug",
-  age: 25,
-  city: "Toronto",
-  country: "Canada",
-  email: "yug@example.com",
-});
-console.info("Profile:", profile);
-
-runCommand("logTest");
-console.info("Computed value:", computeValue());
+// Trigger the functions
+greet("Yug");
+sum(5, 10);
+isValidEmail("test@example.com");
+duplicateA();
+duplicateB();

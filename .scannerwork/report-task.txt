@@ -2,5 +2,5 @@ projectKey=yugncplproject
 serverUrl=http://localhost:9000
 serverVersion=25.6.0.109173
 dashboardUrl=http://localhost:9000/dashboard?id=yugncplproject
-ceTaskId=e4430ae7-8b82-4e59-a2e9-872d51558295
-ceTaskUrl=http://localhost:9000/api/ce/task?id=e4430ae7-8b82-4e59-a2e9-872d51558295
+ceTaskId=7be12f5f-4310-4c5a-9e0a-20906e142fd6
+ceTaskUrl=http://localhost:9000/api/ce/task?id=7be12f5f-4310-4c5a-9e0a-20906e142fd6

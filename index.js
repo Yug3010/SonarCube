@@ -2,10 +2,16 @@ function greet(name = 'Guest') {
   console.log(`Hello, ${name}!`);
 }
 
-function addNumbers(a, b) {
-  return a + b;
+function calculateSum(numbers) {
+  return numbers.reduce((total, num) => total + num, 0);
 }
 
-greet('Alice');
-const sum = addNumbers(5, 7);
-console.log(`Sum: ${sum}`);
+function runApp() {
+  const users = ['Alice', 'Bob'];
+  users.forEach(greet);
+
+  const result = calculateSum([5, 10, 15]);
+  console.log(`Total: ${result}`);
+}
+
+runApp();

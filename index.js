@@ -1,40 +1,41 @@
-// Intentionally written to be "acceptable" but not perfect for SonarQube
-
-function greetUser(name) {
-  if (!name) {
-    name = "Guest"; // Acceptable fallback
-  }
-  console.log("Hello, " + name); // ⚠️ Minor: Avoid console.log in production
+function greetUser(name = "Guest") {
+  // Using default parameter, avoid console.log in production but okay here for demo
+  // If needed, replace with proper logging in real app
+  console.info("Hello, " + name);
 }
 
 function calculateArea(length, width) {
+  if (length <= 0 || width <= 0) {
+    throw new Error("Invalid dimensions");
+  }
   return length * width;
 }
 
 function checkPassword(password) {
-  if (password.length < 6) {
-    console.warn("Weak password!"); // ⚠️ Minor code smell
+  if (typeof password !== "string" || password.length < 6) {
+    return false; // Password too weak
   }
   return true;
 }
 
-// ⚠️ Maintainability issue: too many parameters (but not enough to fail gate)
 function buildProfile(name, age, city, country, email) {
   return {
     name,
     age,
     city,
     country,
-    email
+    email,
   };
 }
 
-// Security Hotspot: eval usage (but not actively dangerous here)
+// Removed eval for security reasons, replaced with safe alternative
 function runCommand(cmd) {
-  eval(cmd); // ⚠️ Security hotspot (should trigger but not fail Quality Gate)
+  // Instead of eval, you can safely handle allowed commands here
+  if (cmd === "logTest") {
+    console.info("Test command executed");
+  }
 }
 
-// Slight duplication
 function duplicateOne() {
   let x = 1;
   x += 2;
@@ -49,11 +50,20 @@ function duplicateTwo() {
   return x;
 }
 
-// Call functions
+// Call functions safely
 greetUser("Yug");
-calculateArea(5, 10);
-checkPassword("abc123");
+try {
+  calculateArea(5, 10);
+} catch (error) {
+  console.error(error.message);
+}
+
+const isPasswordValid = checkPassword("abc123");
+if (!isPasswordValid) {
+  console.warn("Password validation failed");
+}
+
 buildProfile("Yug", 25, "Toronto", "Canada", "yug@example.com");
-runCommand("console.log('Test')");
+runCommand("logTest");
 duplicateOne();
 duplicateTwo();

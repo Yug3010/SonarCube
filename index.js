@@ -1,7 +1,5 @@
 function greetUser(name = "Guest") {
-  // Using default parameter, avoid console.log in production but okay here for demo
-  // If needed, replace with proper logging in real app
-  console.info("Hello, " + name);
+  console.info(`Hello, ${name}`);
 }
 
 function calculateArea(length, width) {
@@ -12,48 +10,38 @@ function calculateArea(length, width) {
 }
 
 function checkPassword(password) {
-  if (typeof password !== "string" || password.length < 6) {
-    return false; // Password too weak
-  }
-  return true;
+  return typeof password === "string" && password.length >= 6;
 }
 
-function buildProfile(name, age, city, country, email) {
-  return {
-    name,
-    age,
-    city,
-    country,
-    email,
-  };
+function buildProfile({ name, age, city, country, email }) {
+  return { name, age, city, country, email };
 }
 
-// Removed eval for security reasons, replaced with safe alternative
 function runCommand(cmd) {
-  // Instead of eval, you can safely handle allowed commands here
-  if (cmd === "logTest") {
-    console.info("Test command executed");
+  const allowedCommands = {
+    logTest: () => console.info("Test command executed"),
+  };
+
+  if (allowedCommands[cmd]) {
+    allowedCommands[cmd]();
+  } else {
+    console.warn("Invalid command");
   }
 }
 
-function duplicateOne() {
+function computeValue() {
   let x = 1;
   x += 2;
   x *= 3;
   return x;
 }
 
-function duplicateTwo() {
-  let x = 1;
-  x += 2;
-  x *= 3;
-  return x;
-}
-
-// Call functions safely
+// Call functions
 greetUser("Yug");
+
 try {
-  calculateArea(5, 10);
+  const area = calculateArea(5, 10);
+  console.info("Area:", area);
 } catch (error) {
   console.error(error.message);
 }
@@ -63,7 +51,14 @@ if (!isPasswordValid) {
   console.warn("Password validation failed");
 }
 
-buildProfile("Yug", 25, "Toronto", "Canada", "yug@example.com");
+const profile = buildProfile({
+  name: "Yug",
+  age: 25,
+  city: "Toronto",
+  country: "Canada",
+  email: "yug@example.com",
+});
+console.info("Profile:", profile);
+
 runCommand("logTest");
-duplicateOne();
-duplicateTwo();
+console.info("Computed value:", computeValue());

@@ -1,39 +1,23 @@
-// A simple file with minor code smells but will pass Quality Gate
+// Simple, clean JavaScript file — minimal smells, no tests, should pass Quality Gate
 
-function greet(name) {
-  const greeting = name ? `Hello, ${name}` : "Hello, Guest";
-  console.info(greeting); // Minor smell: console.info usage
-  return greeting;
+function greet(name = "Guest") {
+  return `Hello, ${name}`;
 }
 
-function sum(a, b) {
+function add(a, b) {
   return a + b;
 }
 
-function isValidEmail(email) {
-  // Simple check; not best practice — may show as code smell
-  return email.includes("@");
+function isPositive(number) {
+  return number > 0;
 }
 
-// Slight duplication (will not fail gate)
-function duplicateA() {
-  let x = 10;
-  x++;
-  return x;
+function sayGoodbye(name = "Guest") {
+  return `Goodbye, ${name}`;
 }
 
-function duplicateB() {
-  let x = 10;
-  x++;
-  return x;
-}
-
-// Function that does nothing (minor issue)
-function unusedFunction() {}
-
-// Trigger the functions
-greet("Yug");
-sum(5, 10);
-isValidEmail("test@example.com");
-duplicateA();
-duplicateB();
+// Trigger functions
+console.info(greet("Yug"));         // console.info is acceptable for demonstration
+console.info(add(3, 4));            // should return 7
+console.info(isPositive(-1));       // should return false
+console.info(sayGoodbye("Yug"));    // Goodbye message

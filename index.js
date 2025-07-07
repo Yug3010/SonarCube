@@ -1,38 +1,21 @@
-console.log("Debugging mode enabled!");
+function greet(name) {
+  if (!name) {
+    // default to 'Guest' if no name provided
+    name = 'Guest';
+  }
 
-var unusedVar = 42;
-
-function tooManyParams(a, b, c, d, e, f) {
-    if (a > 0) {
-        if (b > 0) {
-            if (c > 0) {
-                console.log("Nested too deep");
-            }
-        }
-    }
+  console.log("Hello, " + name + "!");
 }
 
-function duplicate1() {
-    let x = 0;
-    x++;
-    x++;
-    x++;
+function addNumbers(a, b) {
+  return a + b;
 }
 
-function duplicate2() {
-    let x = 0;
-    x++;
-    x++;
-    x++;
-}
+// Example usage
+greet("Alice");
 
-try {
-    riskyOperation();
-} catch (e) {
-}
+const result = addNumbers(5, 7);
+console.log("Sum:", result);
 
-function riskyOperation() {
-    return 1 / 0;
-}
-
-tooManyParams(1, 2, 3, 4, 5, 6);
+// A little unused variable to trigger a minor warning
+const unusedVariable = 42;
